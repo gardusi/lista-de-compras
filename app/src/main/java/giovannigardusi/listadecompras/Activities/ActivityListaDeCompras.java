@@ -32,7 +32,7 @@ public class ActivityListaDeCompras extends AppCompatActivity {
     public final static int NEW_ITEM = 1;
     public final static int EDIT_ITEM = 2;
 
-    Activity activity = this;
+    private Activity activity = this;
 
     private ListView listaDeComprasView;
     private ImageView adicionarButton;
