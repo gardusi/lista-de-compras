@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/menu_lista_de_compras_imprimir"
+        android:icon="@drawable/icon_printer"
+        android:alphabeticShortcut="p"
+        android:title="Imprimir Lista"
+        app:showAsAction="always"/>
+    <item android:id="@+id/menu_lista_de_compras_salvar"
+        android:icon="@drawable/icon_save"
+        android:alphabeticShortcut="s"
+        android:title="Salvar Lista"
+        app:showAsAction="always"/>
+
+</menu>

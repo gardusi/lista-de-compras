@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Lista de Compras</string>
+    <string name="activity_novo_item_titulo">Novo Item</string>
+    <string name="activity_novo_item_dica">Ex: tomate</string>
+    <string name="activity_novo_item_adicionar">Adicionar</string>
+    <string name="activity_menu_nova_lista">Criar nova Lista</string>
+    <string name="activity_menu_abrir_lista">Abrir Lista salva</string>
+    <string name="activity_lista_de_compras_titulo">Minha Lista</string>
+    <string name="activity_lista_de_compras_novo">Adicionar Item</string>
+    <string name="title_activity_main2">Main2Activity</string>
+</resources>
