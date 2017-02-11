@@ -46,7 +46,7 @@
             <Switch
                 android:id="@+id/activity_salvar_lista_check"
                 android:text="@string/activity_salvar_lista_check"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_13sdp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"

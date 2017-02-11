@@ -9,6 +9,7 @@ public class Settings {
     private static final Settings settings = new Settings();
 
     private boolean simpleSave;
+    private boolean showCheck;
 
     // Class constructor is forbidden
     private Settings() {}
@@ -23,5 +24,13 @@ public class Settings {
 
     public boolean isSimpleSave() {
         return simpleSave;
+    }
+
+    public void setShowCheck(boolean showCheck) {
+        this.showCheck = showCheck;
+    }
+
+    public boolean isShowCheck() {
+        return showCheck;
     }
 }

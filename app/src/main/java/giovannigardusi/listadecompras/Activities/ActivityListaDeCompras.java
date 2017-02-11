@@ -31,7 +31,7 @@ public class ActivityListaDeCompras extends AppCompatActivity {
     public final static String PARAM_LISTA = "listaDeCompras";
     public final static String PARAM_SETTINGS = "settings";
 
-    public final static int RESULT_NO_ITEM = 0;
+    public final static int RESULT_BACK = 0;
     public final static int RESULT_NEW_ITEM = 1;
     public final static int RESULT_EDIT_ITEM = 2;
     public final static int RESULT_SETTINGS = 3;
@@ -96,17 +96,18 @@ public class ActivityListaDeCompras extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == resultCode) {
-            ModelProduto item = data.getParcelableExtra(ActivityNovoItem.PARAM_ITEM);
             switch (resultCode) {
                 case RESULT_NEW_ITEM:
-                    listaDeCompras.add(item);
+                    ModelProduto newItem = data.getParcelableExtra(ActivityNovoItem.PARAM_ITEM);
+                    listaDeCompras.add(newItem);
                     break;
                 case RESULT_EDIT_ITEM:
+                    ModelProduto editItem = data.getParcelableExtra(ActivityNovoItem.PARAM_ITEM);
                     int position = data.getIntExtra(ActivityNovoItem.PARAM_POS, -1);
-                    listaDeCompras.set(position, item);
+                    listaDeCompras.set(position, editItem);
                     break;
                 case RESULT_SETTINGS:
-
+                    break;
             }
             adapterListaDeCompras.notifyDataSetChanged();
         }
@@ -170,7 +171,6 @@ public class ActivityListaDeCompras extends AppCompatActivity {
                         case DialogInterface.BUTTON_POSITIVE:
                             activity.finish();
                             break;
-
                         case DialogInterface.BUTTON_NEGATIVE:
                             break;
                     }

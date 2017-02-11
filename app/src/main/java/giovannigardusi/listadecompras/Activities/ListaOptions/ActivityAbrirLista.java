@@ -57,7 +57,6 @@ public class ActivityAbrirLista extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Utils.hideKeyboard(activity);
-                activity.setResult(ActivityListaDeCompras.RESULT_NO_ITEM);
                 activity.finish();
                 return true;
         }

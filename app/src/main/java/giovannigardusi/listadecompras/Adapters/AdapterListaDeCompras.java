@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import giovannigardusi.listadecompras.Models.ModelProduto;
 import giovannigardusi.listadecompras.R;
+import giovannigardusi.listadecompras.Utils.Settings;
 
 /**
  * Created by Giovanni on 04/02/2017.
@@ -46,16 +47,20 @@ public class AdapterListaDeCompras extends ArrayAdapter {
         TextView quantidade = (TextView) row.findViewById(R.id.item_produto_quantidade);
         CheckBox checkBox = (CheckBox) row.findViewById(R.id.item_produto_checkbox);
 
-        // Armazena a posicao do CheckBox a ser marcado
-        checkBox.setTag(position);
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                int position = (Integer) buttonView.getTag();
-                listaDeProdutos.get(position).setMarcado(buttonView.isChecked());
-            }
-        });
-        checkBox.setChecked(listaDeProdutos.get(position).getMarcado());
+        if (Settings.getInstance().isShowCheck()) {
+            // Armazena a posicao do CheckBox a ser marcado
+            checkBox.setTag(position);
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    int position = (Integer) buttonView.getTag();
+                    listaDeProdutos.get(position).setMarcado(buttonView.isChecked());
+                }
+            });
+            checkBox.setChecked(listaDeProdutos.get(position).getMarcado());
+        } else {
+            checkBox.setVisibility(View.GONE);
+        }
 
         String strQtd = listaDeProdutos.get(position).getQuantidade();
         strQtd = strQtd + " " + listaDeProdutos.get(position).getUnidade();

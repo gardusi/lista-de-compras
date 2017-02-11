@@ -25,8 +25,9 @@ public class ActivityMain extends AppCompatActivity {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
-        //TODO [TEST] Configura Simple Save
+        //TODO [TEST] Configura Settings
         Settings.getInstance().setSimpleSave(false);
+        Settings.getInstance().setShowCheck(true);
 
         setContentView(R.layout.activity_main);
         mHandler = new Handler();

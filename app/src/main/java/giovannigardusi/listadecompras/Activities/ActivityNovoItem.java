@@ -101,7 +101,7 @@ public class ActivityNovoItem extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Utils.hideKeyboard(activity);
-                activity.setResult(ActivityListaDeCompras.RESULT_NO_ITEM);
+                activity.setResult(ActivityListaDeCompras.RESULT_BACK);
                 activity.finish();
                 return true;
         }

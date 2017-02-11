@@ -1,13 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_settings"
+    android:id="@+id/activity_novo_item"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@android:color/holo_blue_bright"
+    android:padding="@dimen/_10sdp"
     tools:context="giovannigardusi.listadecompras.Activities.ActivitySettings">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:text="@string/activity_settings_title"
+            android:textSize="@dimen/_18sdp" />
+
+        <Switch
+            android:id="@+id/activity_settings_simplesave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/activity_settings_simplesave"
+            android:textSize="@dimen/_13sdp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:fontFamily="sans-serif-light"
+            android:textSize="@dimen/_10sdp"
+            android:text="@string/activity_settings_simplesave_explain" />
+
+        <Switch
+            android:id="@+id/activity_settings_check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/activity_settings_check"
+            android:textSize="@dimen/_13sdp" />
+
+        <TextView
+            android:id="@+id/activity_settings_salvar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@android:color/holo_blue_light"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:paddingBottom="@dimen/_5sdp"
+            android:paddingLeft="@dimen/_10sdp"
+            android:paddingRight="@dimen/_10sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:text="@string/activity_settings_salvar"
+            android:textAllCaps="true"
+            android:textSize="@dimen/_12sdp" />
+
+    </LinearLayout>
 
 </RelativeLayout>
