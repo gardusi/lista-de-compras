@@ -16,8 +16,6 @@ public class Constants {
     public static final String ONE_HALF = "½";
     public static final String ONE_FOURTH = "¼";
 
-    public static final String SAVE_MSG = "Você quer mesmo sair?\nSe sair agora, sua lista não será salva.";
-
     private Constants() {
         populateUnidades();
         populateQuantidades();

@@ -21,7 +21,7 @@ import giovannigardusi.listadecompras.Utils.Utils;
 
 public class ActivityNovoItem extends AppCompatActivity {
 
-    public final static String PARAM_OBJ = "novoItem";
+    public final static String PARAM_ITEM = "novoItem";
     public final static String PARAM_POS = "position";
 
     Activity activity = this;
@@ -42,7 +42,7 @@ public class ActivityNovoItem extends AppCompatActivity {
         setContentView(R.layout.activity_novo_item);
 
         // Recebe parametros da Activity anterior
-        ModelProduto item = getIntent().getParcelableExtra(PARAM_OBJ);
+        ModelProduto item = getIntent().getParcelableExtra(PARAM_ITEM);
 
         // Ativa botao de Voltar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -64,6 +64,13 @@ public class ActivityNovoItem extends AppCompatActivity {
         unidadeSpinner.setAdapter(adapterUnidade);
         quantidadeSpinner.setAdapter(adapterQuantidade);
 
+        // Preenche dados caso seja uma edicao
+        if (item != null) {
+            isEdit = true;
+            adicionarButton.setTag(item.getMarcado());
+            writeFields(item);
+        }
+
         // Botao de Adicionar
         adicionarButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,23 +82,18 @@ public class ActivityNovoItem extends AppCompatActivity {
                 item.setQuantidade(quantidadeSpinner.getSelectedItem().toString());
 
                 Intent intent = new Intent();
-                intent.putExtra(PARAM_OBJ, item);
+                intent.putExtra(PARAM_ITEM, item);
                 if (isEdit) {
+                    item.setMarcado((boolean) adicionarButton.getTag());
                     intent.putExtra(PARAM_POS, getIntent().getIntExtra(PARAM_POS, -1));
-                    activity.setResult(ActivityListaDeCompras.EDIT_ITEM, intent);
+                    activity.setResult(ActivityListaDeCompras.RESULT_EDIT_ITEM, intent);
                 } else {
-                    activity.setResult(ActivityListaDeCompras.NEW_ITEM, intent);
+                    activity.setResult(ActivityListaDeCompras.RESULT_NEW_ITEM, intent);
                 }
                 Utils.hideKeyboard(activity);
                 activity.finish();
             }
         });
-
-        // Preenche dados caso seja uma edicao
-        if (item != null) {
-            isEdit = true;
-            writeFields(item);
-        }
     }
 
     @Override
@@ -99,7 +101,7 @@ public class ActivityNovoItem extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Utils.hideKeyboard(activity);
-                activity.setResult(ActivityListaDeCompras.NO_ITEM);
+                activity.setResult(ActivityListaDeCompras.RESULT_NO_ITEM);
                 activity.finish();
                 return true;
         }

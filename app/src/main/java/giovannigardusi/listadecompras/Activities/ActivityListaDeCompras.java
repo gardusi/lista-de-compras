@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -22,15 +23,18 @@ import giovannigardusi.listadecompras.Activities.ListaOptions.ActivitySalvarList
 import giovannigardusi.listadecompras.Adapters.AdapterListaDeCompras;
 import giovannigardusi.listadecompras.Models.ModelProduto;
 import giovannigardusi.listadecompras.R;
-import giovannigardusi.listadecompras.Utils.Constants;
+import giovannigardusi.listadecompras.Utils.Settings;
+import giovannigardusi.listadecompras.Utils.Utils;
 
 public class ActivityListaDeCompras extends AppCompatActivity {
 
-    public final static String PARAM_OBJ = "listaDeCompras";
+    public final static String PARAM_LISTA = "listaDeCompras";
+    public final static String PARAM_SETTINGS = "settings";
 
-    public final static int NO_ITEM = 0;
-    public final static int NEW_ITEM = 1;
-    public final static int EDIT_ITEM = 2;
+    public final static int RESULT_NO_ITEM = 0;
+    public final static int RESULT_NEW_ITEM = 1;
+    public final static int RESULT_EDIT_ITEM = 2;
+    public final static int RESULT_SETTINGS = 3;
 
     private Activity activity = this;
 
@@ -48,17 +52,18 @@ public class ActivityListaDeCompras extends AppCompatActivity {
 
         // Recebe parametros salvos antes de onStop()
         if (savedInstanceState != null) {
-            listaDeCompras = savedInstanceState.getParcelableArrayList(PARAM_OBJ);
+            listaDeCompras = savedInstanceState.getParcelableArrayList(PARAM_LISTA);
         } else {
             // Recebe parametros da Activity anterior
-            listaDeCompras = getIntent().getParcelableArrayListExtra(PARAM_OBJ);
+            listaDeCompras = getIntent().getParcelableArrayListExtra(PARAM_LISTA);
             if (listaDeCompras == null) {
                 listaDeCompras = new ArrayList<>();
             }
         }
 
-        // Ativa botao de Voltar
+        // Configura Support Action Bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
 
         // Pega os IDs
         listaDeComprasView = (ListView) findViewById(R.id.activity_lista_de_compras_lista);
@@ -71,7 +76,7 @@ public class ActivityListaDeCompras extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, ActivityNovoItem.class);
-                startActivityForResult(intent, NEW_ITEM);
+                startActivityForResult(intent, RESULT_NEW_ITEM);
             }
         });
 
@@ -81,9 +86,9 @@ public class ActivityListaDeCompras extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(activity, ActivityNovoItem.class);
-                intent.putExtra(ActivityNovoItem.PARAM_OBJ, listaDeCompras.get(position));
+                intent.putExtra(ActivityNovoItem.PARAM_ITEM, listaDeCompras.get(position));
                 intent.putExtra(ActivityNovoItem.PARAM_POS, position);
-                startActivityForResult(intent, EDIT_ITEM);
+                startActivityForResult(intent, RESULT_EDIT_ITEM);
             }
         });
     }
@@ -91,15 +96,17 @@ public class ActivityListaDeCompras extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == resultCode) {
-            ModelProduto item = data.getParcelableExtra(ActivityNovoItem.PARAM_OBJ);
+            ModelProduto item = data.getParcelableExtra(ActivityNovoItem.PARAM_ITEM);
             switch (resultCode) {
-                case NEW_ITEM:
+                case RESULT_NEW_ITEM:
                     listaDeCompras.add(item);
                     break;
-                case EDIT_ITEM:
+                case RESULT_EDIT_ITEM:
                     int position = data.getIntExtra(ActivityNovoItem.PARAM_POS, -1);
                     listaDeCompras.set(position, item);
                     break;
+                case RESULT_SETTINGS:
+
             }
             adapterListaDeCompras.notifyDataSetChanged();
         }
@@ -120,23 +127,32 @@ public class ActivityListaDeCompras extends AppCompatActivity {
                 return true;
             // Tela de Salvar Lista
             case R.id.menu_lista_de_compras_salvar:
-                Intent intentSave = new Intent(activity, ActivitySalvarLista.class);
-                intentSave.putParcelableArrayListExtra(PARAM_OBJ, listaDeCompras);
-                startActivity(intentSave);
+                if (Settings.getInstance().isSimpleSave()) {
+                    Utils.writeFile(activity, "simple_save_list.txt", listaDeCompras, true);
+                    Toast.makeText(activity, "Lista salva!", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intentSave = new Intent(activity, ActivitySalvarLista.class);
+                    intentSave.putParcelableArrayListExtra(PARAM_LISTA, listaDeCompras);
+                    startActivity(intentSave);
+                }
                 return true;
             // Tela de Imprimir Lista
             case R.id.menu_lista_de_compras_imprimir:
                 Intent intentPrint = new Intent(activity, ActivityImprimirLista.class);
-                intentPrint.putParcelableArrayListExtra(PARAM_OBJ, listaDeCompras);
+                intentPrint.putParcelableArrayListExtra(PARAM_LISTA, listaDeCompras);
                 startActivity(intentPrint);
                 return true;
+            // Tela de Configuracoes
+            case R.id.menu_lista_de_compras_settings:
+                Intent intentSettings = new Intent(activity, ActivitySettings.class);
+                startActivityForResult(intentSettings, RESULT_SETTINGS);
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onSaveInstanceState(Bundle instanceState) {
-        instanceState.putParcelableArrayList(PARAM_OBJ, listaDeCompras);
+        instanceState.putParcelableArrayList(PARAM_LISTA, listaDeCompras);
         super.onSaveInstanceState(instanceState);
     }
 
@@ -161,7 +177,8 @@ public class ActivityListaDeCompras extends AppCompatActivity {
                 }
             };
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-            builder.setMessage(Constants.SAVE_MSG).setPositiveButton("Sair sem Salvar", dialogClickListener)
+            builder.setMessage(getString(R.string.activity_lista_de_compras_sair))
+                    .setPositiveButton("Sair sem Salvar", dialogClickListener)
                     .setNegativeButton("Voltar", dialogClickListener).show();
         } else {
             activity.finish();

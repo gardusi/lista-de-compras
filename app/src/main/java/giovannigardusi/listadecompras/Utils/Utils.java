@@ -30,7 +30,7 @@ public class Utils {
         ((InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(activity.findViewById(R.id.activity_novo_item).getWindowToken(), 0);
     }
 
-    public static void writeFile(Activity activity, String filename, ArrayList<ModelProduto> lista) {
+    public static void writeFile(Activity activity, String filename, ArrayList<ModelProduto> lista, boolean keepChecked) {
         try {
             // Write a file to the disk
             FileOutputStream fOut = activity.openFileOutput(filename, Activity.MODE_PRIVATE);
@@ -39,7 +39,7 @@ public class Utils {
             // Write the string to the file
             osw.write("{");
             for (ModelProduto item : lista) {
-                osw.write(item.writeToFile());
+                osw.write(item.writeToFile(keepChecked));
             }
             osw.write("}");
 

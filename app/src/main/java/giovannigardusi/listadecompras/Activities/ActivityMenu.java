@@ -7,8 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import giovannigardusi.listadecompras.Activities.ListaOptions.ActivityAbrirLista;
+import giovannigardusi.listadecompras.Models.ModelProduto;
 import giovannigardusi.listadecompras.R;
+import giovannigardusi.listadecompras.Utils.Settings;
+import giovannigardusi.listadecompras.Utils.Utils;
 
 public class ActivityMenu extends AppCompatActivity {
 
@@ -29,7 +34,7 @@ public class ActivityMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, ActivityListaDeCompras.class);
-                intent.putParcelableArrayListExtra(ActivityListaDeCompras.PARAM_OBJ, null);
+                intent.putParcelableArrayListExtra(ActivityListaDeCompras.PARAM_LISTA, null);
                 startActivity(intent);
             }
         });
@@ -37,8 +42,15 @@ public class ActivityMenu extends AppCompatActivity {
         abrirLista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, ActivityAbrirLista.class);
-                startActivity(intent);
+                if (Settings.getInstance().isSimpleSave()) {
+                    ArrayList<ModelProduto> listaDeCompras = Utils.readFile(activity, "simple_save_list.txt");
+                    Intent intent = new Intent(activity, ActivityListaDeCompras.class);
+                    intent.putParcelableArrayListExtra(ActivityListaDeCompras.PARAM_LISTA, listaDeCompras);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(activity, ActivityAbrirLista.class);
+                    startActivity(intent);
+                }
             }
         });
     }

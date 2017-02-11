@@ -55,8 +55,13 @@ public class ModelProduto implements Parcelable {
         this.marcado = marcado;
     }
 
-    public String writeToFile() {
-        return getNome() + ":" + getQuantidade() + ":" + getUnidade() + ":" + getMarcado() + ";";
+    public String writeToFile(boolean keepChecked) {
+        if (keepChecked) {
+            return getNome() + ":" + getQuantidade() + ":" + getUnidade() + ":" + getMarcado() + ";";
+        } else {
+            return getNome() + ":" + getQuantidade() + ":" + getUnidade() + ":false;";
+        }
+
     }
 
     public static ModelProduto readFromFile(String input) {

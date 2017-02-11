@@ -9,6 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import giovannigardusi.listadecompras.Activities.ActivityMenu;
+import giovannigardusi.listadecompras.Utils.Settings;
 
 public class ActivityMain extends AppCompatActivity {
 
@@ -23,6 +24,9 @@ public class ActivityMain extends AppCompatActivity {
         Window window = activity.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+        //TODO [TEST] Configura Simple Save
+        Settings.getInstance().setSimpleSave(false);
 
         setContentView(R.layout.activity_main);
         mHandler = new Handler();

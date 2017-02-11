@@ -44,7 +44,7 @@ public class ActivityImprimirLista extends AppCompatActivity {
         setContentView(R.layout.activity_imprimir_lista);
 
         ArrayList<ModelProduto> listaDeCompras = getIntent()
-                .getParcelableArrayListExtra(ActivityListaDeCompras.PARAM_OBJ);
+                .getParcelableArrayListExtra(ActivityListaDeCompras.PARAM_LISTA);
 
         createPdf("test.pdf", listaDeCompras);
     }
@@ -100,6 +100,7 @@ public class ActivityImprimirLista extends AppCompatActivity {
         }
 
         viewPdf(filename);
+        activity.finish();
     }
 
     private void viewPdf(String filename) {
