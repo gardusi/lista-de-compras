@@ -12,6 +12,7 @@ public class ModelProduto implements Parcelable {
     private String nome;
     private String quantidade;
     private String unidade;
+    private boolean marcado;
 
     public ModelProduto() { }
 
@@ -26,6 +27,7 @@ public class ModelProduto implements Parcelable {
         this.nome = p.readString();
         this.quantidade = p.readString();
         this.unidade = p.readString();
+        this.marcado = p.readInt() > 0;
     }
 
     public String getNome() {
@@ -37,6 +39,9 @@ public class ModelProduto implements Parcelable {
     public String getUnidade() {
         return unidade;
     }
+    public boolean getMarcado() {
+        return marcado;
+    }
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -46,9 +51,12 @@ public class ModelProduto implements Parcelable {
     public void setUnidade(String unidade) {
         this.unidade = unidade;
     }
+    public void setMarcado(boolean marcado) {
+        this.marcado = marcado;
+    }
 
     public String writeToFile() {
-        return getNome() + ":" + getQuantidade() + ":" + getUnidade() + ";";
+        return getNome() + ":" + getQuantidade() + ":" + getUnidade() + ":" + getMarcado() + ";";
     }
 
     public static ModelProduto readFromFile(String input) {
@@ -58,6 +66,7 @@ public class ModelProduto implements Parcelable {
         item.setNome(str[0]);
         item.setQuantidade(str[1]);
         item.setUnidade(str[2]);
+        item.setMarcado(Boolean.parseBoolean(str[3]));
 
         return item;
     }
@@ -85,5 +94,6 @@ public class ModelProduto implements Parcelable {
         dest.writeString(nome);
         dest.writeString(quantidade);
         dest.writeString(unidade);
+        dest.writeInt(marcado ? 1 : 0);
     }
 }

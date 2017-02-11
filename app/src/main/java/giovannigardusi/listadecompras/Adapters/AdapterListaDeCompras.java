@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -42,6 +44,18 @@ public class AdapterListaDeCompras extends ArrayAdapter {
 
         TextView nome = (TextView) row.findViewById(R.id.item_produto_nome);
         TextView quantidade = (TextView) row.findViewById(R.id.item_produto_quantidade);
+        CheckBox checkBox = (CheckBox) row.findViewById(R.id.item_produto_checkbox);
+
+        // Armazena a posicao do CheckBox a ser marcado
+        checkBox.setTag(position);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                int position = (Integer) buttonView.getTag();
+                listaDeProdutos.get(position).setMarcado(buttonView.isChecked());
+            }
+        });
+        checkBox.setChecked(listaDeProdutos.get(position).getMarcado());
 
         String strQtd = listaDeProdutos.get(position).getQuantidade();
         strQtd = strQtd + " " + listaDeProdutos.get(position).getUnidade();
