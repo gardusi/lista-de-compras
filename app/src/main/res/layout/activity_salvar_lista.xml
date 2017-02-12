@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="@dimen/_10sdp"
     android:background="@android:color/holo_blue_bright"
-    tools:context="giovannigardusi.listadecompras.Activities.ListaOptions.ActivitySalvarLista">
+    tools:context="giovannigardusi.listadecompras.Activities.ListaIO.ActivitySalvarLista">
 
     <LinearLayout
         android:layout_width="match_parent"

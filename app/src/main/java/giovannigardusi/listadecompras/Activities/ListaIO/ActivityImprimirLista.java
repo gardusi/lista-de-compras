@@ -1,4 +1,4 @@
-package giovannigardusi.listadecompras.Activities.ListaOptions;
+package giovannigardusi.listadecompras.Activities.ListaIO;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;

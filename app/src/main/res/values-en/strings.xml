@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lista de Compras</string>
+    <string name="activity_abrir_lista_abrir">Open</string>
+    <string name="activity_abrir_lista_dica">List Name</string>
+    <string name="activity_abrir_lista_titulo">Open List</string>
+    <string name="activity_lista_de_compras_novo">Add Item</string>
+    <string name="activity_lista_de_compras_sair">Do you really want to leave?\nIf you do so, your list will not be saved.</string>
+    <string name="activity_lista_de_compras_saved">List Saved!</string>
+    <string name="activity_lista_de_compras_titulo">My List</string>
+    <string name="activity_menu_abrir_lista">Open Saved List</string>
+    <string name="activity_menu_nova_lista">Create New List</string>
+    <string name="activity_novo_item_adicionar">Add</string>
+    <string name="activity_novo_item_dica">Ex: tomato</string>
+    <string name="activity_novo_item_rule">The name is required.</string>
+    <string name="activity_novo_item_titulo">New Item</string>
+    <string name="activity_salvar_lista_check">Keep checked</string>
+    <string name="activity_salvar_lista_dica">List Name</string>
+    <string name="activity_salvar_lista_rule">The name may only contain letters and numbers.</string>
+    <string name="activity_salvar_lista_salvar">Save</string>
+    <string name="activity_salvar_lista_titulo">Save List</string>
+    <string name="activity_settings_check">Toggle check boxes</string>
+    <string name="activity_settings_salvar">Save</string>
+    <string name="activity_settings_simplesave">Simple Save</string>
+    <string name="activity_settings_simplesave_explain">When active, the open and save buttons does not require a List name. The app is limited to only one list.</string>
+    <string name="activity_settings_title">Settings</string>
+</resources>

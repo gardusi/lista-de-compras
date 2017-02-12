@@ -22,9 +22,9 @@
         <activity android:name=".Activities.ActivityMenu" />
         <activity android:name=".Activities.ActivityListaDeCompras" />
         <activity android:name=".Activities.ActivityNovoItem" />
-        <activity android:name=".Activities.ListaOptions.ActivitySalvarLista" />
-        <activity android:name=".Activities.ListaOptions.ActivityAbrirLista" />
-        <activity android:name=".Activities.ListaOptions.ActivityImprimirLista" />
+        <activity android:name=".Activities.ListaIO.ActivitySalvarLista" />
+        <activity android:name=".Activities.ListaIO.ActivityAbrirLista" />
+        <activity android:name=".Activities.ListaIO.ActivityImprimirLista" />
         <activity android:name=".Activities.ActivitySettings"></activity>
     </application>
 

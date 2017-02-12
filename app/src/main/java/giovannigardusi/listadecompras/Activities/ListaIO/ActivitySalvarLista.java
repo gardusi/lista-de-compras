@@ -1,4 +1,4 @@
-package giovannigardusi.listadecompras.Activities.ListaOptions;
+package giovannigardusi.listadecompras.Activities.ListaIO;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import giovannigardusi.listadecompras.Activities.ActivityListaDeCompras;
 import giovannigardusi.listadecompras.Models.ModelProduto;
 import giovannigardusi.listadecompras.R;
+import giovannigardusi.listadecompras.Utils.ReaderLista;
 import giovannigardusi.listadecompras.Utils.Utils;
 
 public class ActivitySalvarLista extends AppCompatActivity {
@@ -48,11 +49,15 @@ public class ActivitySalvarLista extends AppCompatActivity {
         salvarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String filename = arquivoEditText.getText().toString();
-                boolean keepChecked = checkSwitch.isChecked();
-                Utils.writeFile(activity, filename, listaDeCompras, keepChecked);
-                Utils.hideKeyboard(activity);
-                activity.finish();
+                String filename = arquivoEditText.getText().toString().trim();
+                if (filename.equals(""))
+                    arquivoEditText.setError(getString(R.string.activity_salvar_lista_rule2));
+                else if (Utils.isAlphanumerical(filename)) {
+                    boolean keepChecked = checkSwitch.isChecked();
+                    ReaderLista.write(activity, filename, listaDeCompras, keepChecked);
+                    Utils.hideKeyboard(activity);
+                    activity.finish();
+                } else arquivoEditText.setError(getString(R.string.activity_salvar_lista_rule));
             }
         });
     }

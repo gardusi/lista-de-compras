@@ -9,11 +9,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import giovannigardusi.listadecompras.Activities.ListaOptions.ActivityAbrirLista;
+import giovannigardusi.listadecompras.Activities.ListaIO.ActivityAbrirLista;
 import giovannigardusi.listadecompras.Models.ModelProduto;
 import giovannigardusi.listadecompras.R;
+import giovannigardusi.listadecompras.Utils.Constants;
+import giovannigardusi.listadecompras.Utils.ReaderLista;
 import giovannigardusi.listadecompras.Utils.Settings;
-import giovannigardusi.listadecompras.Utils.Utils;
 
 public class ActivityMenu extends AppCompatActivity {
 
@@ -43,7 +44,7 @@ public class ActivityMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (Settings.getInstance().isSimpleSave()) {
-                    ArrayList<ModelProduto> listaDeCompras = Utils.readFile(activity, "simple_save_list.txt");
+                    ArrayList<ModelProduto> listaDeCompras = ReaderLista.read(activity, Constants.SIMPLE_SAVE_NAME);
                     Intent intent = new Intent(activity, ActivityListaDeCompras.class);
                     intent.putParcelableArrayListExtra(ActivityListaDeCompras.PARAM_LISTA, listaDeCompras);
                     startActivity(intent);

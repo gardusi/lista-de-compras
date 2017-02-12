@@ -2,36 +2,41 @@
     <string name="app_name">Lista de Compras</string>
 
     <!--Menu Principal-->
-    <string name="activity_menu_nova_lista">Criar nova Lista</string>
-    <string name="activity_menu_abrir_lista">Abrir Lista salva</string>
+    <string name="activity_menu_nova_lista">Criar Nova Lista</string>
+    <string name="activity_menu_abrir_lista">Abrir Lista Salva</string>
 
     <!--Lista de Compras-->
     <string name="activity_lista_de_compras_titulo">Minha Lista</string>
     <string name="activity_lista_de_compras_novo">Adicionar Item</string>
+    <string name="activity_lista_de_compras_saved">Lista salva!</string>
+    <string name="activity_lista_de_compras_vazia">Sua lista ainda está vazia.</string>
     <string name="activity_lista_de_compras_sair">Você quer mesmo sair?\nSe sair agora, sua lista não será salva.</string>
 
     <!--Novo Item-->
     <string name="activity_novo_item_titulo">Novo Item</string>
     <string name="activity_novo_item_dica">Ex: tomate</string>
     <string name="activity_novo_item_adicionar">Adicionar</string>
+    <string name="activity_novo_item_rule">O nome é obrigatório.</string>
 
     <!--Salvar Lista-->
     <string name="activity_salvar_lista_titulo">Salvar Lista</string>
-    <string name="activity_salvar_lista_dica">Nome do Arquivo</string>
+    <string name="activity_salvar_lista_dica">Nome da Lista</string>
     <string name="activity_salvar_lista_check">Manter marcações</string>
     <string name="activity_salvar_lista_salvar">Salvar</string>
+    <string name="activity_salvar_lista_rule">O nome pode conter apenas letras e números.</string>
+    <string name="activity_salvar_lista_rule2">O nome é obrigatório.</string>
 
     <!--Abrir Lista-->
     <string name="activity_abrir_lista_titulo">Abrir Lista</string>
-    <string name="activity_abrir_lista_dica">Nome do Arquivo</string>
+    <string name="activity_abrir_lista_dica">Nome da Lista</string>
     <string name="activity_abrir_lista_abrir">Abrir</string>
+    <string name="activity_abrir_lista_excluir">Você tem certeza de que deseja excluir</string>
 
     <!--Settings-->
     <string name="activity_settings_title">Configurações</string>
     <string name="activity_settings_simplesave">Salvar simplificado</string>
     <string name="activity_settings_salvar">Salvar</string>
-    <string name="activity_settings_simplesave_explain">Quando ativo, os botões de abrir e salvar lista não pedem um nome de arquivo. O programa fica limitado a uma única lista.</string>
+    <string name="activity_settings_simplesave_explain">Quando ativo, os botões de abrir e salvar lista não pedem um nome de Lista. O aplicativo fica limitado a uma única lista.</string>
     <string name="activity_settings_check">Ativar marcadores</string>
-
 
 </resources>

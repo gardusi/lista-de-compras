@@ -18,13 +18,14 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import giovannigardusi.listadecompras.Activities.ListaOptions.ActivityImprimirLista;
-import giovannigardusi.listadecompras.Activities.ListaOptions.ActivitySalvarLista;
+import giovannigardusi.listadecompras.Activities.ListaIO.ActivityImprimirLista;
+import giovannigardusi.listadecompras.Activities.ListaIO.ActivitySalvarLista;
 import giovannigardusi.listadecompras.Adapters.AdapterListaDeCompras;
 import giovannigardusi.listadecompras.Models.ModelProduto;
 import giovannigardusi.listadecompras.R;
+import giovannigardusi.listadecompras.Utils.Constants;
+import giovannigardusi.listadecompras.Utils.ReaderLista;
 import giovannigardusi.listadecompras.Utils.Settings;
-import giovannigardusi.listadecompras.Utils.Utils;
 
 public class ActivityListaDeCompras extends AppCompatActivity {
 
@@ -129,8 +130,8 @@ public class ActivityListaDeCompras extends AppCompatActivity {
             // Tela de Salvar Lista
             case R.id.menu_lista_de_compras_salvar:
                 if (Settings.getInstance().isSimpleSave()) {
-                    Utils.writeFile(activity, "simple_save_list.txt", listaDeCompras, true);
-                    Toast.makeText(activity, "Lista salva!", Toast.LENGTH_LONG).show();
+                    ReaderLista.write(activity, Constants.SIMPLE_SAVE_NAME, listaDeCompras, true);
+                    Toast.makeText(activity, getString(R.string.activity_lista_de_compras_saved), Toast.LENGTH_LONG).show();
                 } else {
                     Intent intentSave = new Intent(activity, ActivitySalvarLista.class);
                     intentSave.putParcelableArrayListExtra(PARAM_LISTA, listaDeCompras);
@@ -139,9 +140,13 @@ public class ActivityListaDeCompras extends AppCompatActivity {
                 return true;
             // Tela de Imprimir Lista
             case R.id.menu_lista_de_compras_imprimir:
-                Intent intentPrint = new Intent(activity, ActivityImprimirLista.class);
-                intentPrint.putParcelableArrayListExtra(PARAM_LISTA, listaDeCompras);
-                startActivity(intentPrint);
+                if (listaDeCompras.size() > 0) {
+                    Intent intentPrint = new Intent(activity, ActivityImprimirLista.class);
+                    intentPrint.putParcelableArrayListExtra(PARAM_LISTA, listaDeCompras);
+                    startActivity(intentPrint);
+                } else {
+                    Toast.makeText(activity, getString(R.string.activity_lista_de_compras_vazia), Toast.LENGTH_LONG).show();
+                }
                 return true;
             // Tela de Configuracoes
             case R.id.menu_lista_de_compras_settings:

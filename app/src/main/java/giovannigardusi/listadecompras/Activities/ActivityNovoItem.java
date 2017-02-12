@@ -75,23 +75,24 @@ public class ActivityNovoItem extends AppCompatActivity {
         adicionarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!itemEditText.getText().toString().trim().equals("")) {
+                    ModelProduto item = new ModelProduto();
+                    item.setNome(itemEditText.getText().toString().trim());
+                    item.setUnidade(unidadeSpinner.getSelectedItem().toString());
+                    item.setQuantidade(quantidadeSpinner.getSelectedItem().toString());
 
-                ModelProduto item = new ModelProduto();
-                item.setNome(itemEditText.getText().toString());
-                item.setUnidade(unidadeSpinner.getSelectedItem().toString());
-                item.setQuantidade(quantidadeSpinner.getSelectedItem().toString());
-
-                Intent intent = new Intent();
-                intent.putExtra(PARAM_ITEM, item);
-                if (isEdit) {
-                    item.setMarcado((boolean) adicionarButton.getTag());
-                    intent.putExtra(PARAM_POS, getIntent().getIntExtra(PARAM_POS, -1));
-                    activity.setResult(ActivityListaDeCompras.RESULT_EDIT_ITEM, intent);
-                } else {
-                    activity.setResult(ActivityListaDeCompras.RESULT_NEW_ITEM, intent);
-                }
-                Utils.hideKeyboard(activity);
-                activity.finish();
+                    Intent intent = new Intent();
+                    intent.putExtra(PARAM_ITEM, item);
+                    if (isEdit) {
+                        item.setMarcado((boolean) adicionarButton.getTag());
+                        intent.putExtra(PARAM_POS, getIntent().getIntExtra(PARAM_POS, -1));
+                        activity.setResult(ActivityListaDeCompras.RESULT_EDIT_ITEM, intent);
+                    } else {
+                        activity.setResult(ActivityListaDeCompras.RESULT_NEW_ITEM, intent);
+                    }
+                    Utils.hideKeyboard(activity);
+                    activity.finish();
+                } else itemEditText.setError(getString(R.string.activity_novo_item_rule));
             }
         });
     }
