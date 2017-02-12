@@ -3,16 +3,16 @@ package giovannigardusi.listadecompras.Activities;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -40,7 +40,7 @@ public class ActivityListaDeCompras extends AppCompatActivity {
     private Activity activity = this;
 
     private ListView listaDeComprasView;
-    private ImageView adicionarButton;
+    private FloatingActionButton adicionarButton;
 
     private AdapterListaDeCompras adapterListaDeCompras;
 
@@ -68,16 +68,25 @@ public class ActivityListaDeCompras extends AppCompatActivity {
 
         // Pega os IDs
         listaDeComprasView = (ListView) findViewById(R.id.activity_lista_de_compras_lista);
-        adicionarButton = (ImageView) findViewById(R.id.activity_lista_de_compras_adicionar);
+        adicionarButton = (FloatingActionButton) findViewById(R.id.activity_lista_de_compras_adicionar);
 
-        // Pinta sinal (+) na cor branca
-        adicionarButton.setColorFilter(Color.WHITE);
-
-        adicionarButton.setOnClickListener(new View.OnClickListener() {
+        listaDeComprasView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, ActivityNovoItem.class);
-                startActivityForResult(intent, RESULT_NEW_ITEM);
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                switch (scrollState) {
+                    case SCROLL_STATE_IDLE:
+                        adicionarButton.show();
+                        break;
+                    case SCROLL_STATE_FLING:
+                    case SCROLL_STATE_TOUCH_SCROLL:
+                        adicionarButton.hide();
+                        break;
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
             }
         });
 
@@ -188,5 +197,10 @@ public class ActivityListaDeCompras extends AppCompatActivity {
         } else {
             activity.finish();
         }
+    }
+
+    public void adicionarItem(View v) {
+        Intent intent = new Intent(activity, ActivityNovoItem.class);
+        startActivityForResult(intent, RESULT_NEW_ITEM);
     }
 }

@@ -3,9 +3,9 @@ package giovannigardusi.listadecompras.Activities;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SwitchCompat;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import giovannigardusi.listadecompras.R;
@@ -15,8 +15,8 @@ public class ActivitySettings extends AppCompatActivity {
 
     private Activity activity = this;
 
-    private Switch simpleSaveSwitch;
-    private Switch showCheckSwitch;
+    private SwitchCompat simpleSaveSwitch;
+    private SwitchCompat showCheckSwitch;
     private TextView salvarButton;
 
     @Override
@@ -28,8 +28,8 @@ public class ActivitySettings extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Pega os IDs
-        simpleSaveSwitch = (Switch) findViewById(R.id.activity_settings_simplesave);
-        showCheckSwitch = (Switch) findViewById(R.id.activity_settings_check);
+        simpleSaveSwitch = (SwitchCompat) findViewById(R.id.activity_settings_simplesave);
+        showCheckSwitch = (SwitchCompat) findViewById(R.id.activity_settings_check);
         salvarButton = (TextView) findViewById(R.id.activity_settings_salvar);
 
         // Inicializa com dados pre-configurados

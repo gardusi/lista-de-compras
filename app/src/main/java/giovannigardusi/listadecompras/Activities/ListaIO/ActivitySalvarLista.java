@@ -3,6 +3,7 @@ package giovannigardusi.listadecompras.Activities.ListaIO;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SwitchCompat;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -24,7 +25,7 @@ public class ActivitySalvarLista extends AppCompatActivity {
     private Activity activity = this;
 
     private EditText arquivoEditText;
-    private Switch checkSwitch;
+    private SwitchCompat checkSwitch;
     private TextView salvarButton;
 
     @Override
@@ -43,9 +44,10 @@ public class ActivitySalvarLista extends AppCompatActivity {
 
         // Pega os IDs
         arquivoEditText = (EditText) findViewById(R.id.activity_salvar_lista_arquivo);
-        checkSwitch = (Switch) findViewById(R.id.activity_salvar_lista_check);
+        checkSwitch = (SwitchCompat) findViewById(R.id.activity_salvar_lista_check);
         salvarButton = (TextView) findViewById(R.id.activity_salvar_lista_salvar);
 
+        checkSwitch.setChecked(true);
         salvarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

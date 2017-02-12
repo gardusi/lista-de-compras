@@ -27,7 +27,7 @@
             android:text="@string/activity_settings_title"
             android:textSize="@dimen/_18sdp" />
 
-        <Switch
+        <android.support.v7.widget.SwitchCompat
             android:id="@+id/activity_settings_simplesave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
             android:textSize="@dimen/_10sdp"
             android:text="@string/activity_settings_simplesave_explain" />
 
-        <Switch
+        <android.support.v7.widget.SwitchCompat
             android:id="@+id/activity_settings_check"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
             android:id="@+id/activity_settings_salvar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@android:color/holo_blue_light"
             android:fontFamily="sans-serif-light"

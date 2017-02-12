@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_novo_item"
     android:layout_width="match_parent"
@@ -31,22 +32,27 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:clipToPadding="false"
             android:fontFamily="sans-serif-light"
-            android:paddingBottom="@dimen/_60sdp" />
+            android:paddingBottom="@dimen/_60sdp"
+            android:scrollbarStyle="outsideOverlay"/>
 
     </LinearLayout>
 
-    <ImageView
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/activity_lista_de_compras_adicionar"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="@dimen/_15sdp"
         android:layout_marginRight="@dimen/_15sdp"
-        android:background="@drawable/frame"
-        android:padding="@dimen/_5sdp"
-        android:src="@android:drawable/ic_input_add" />
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:onClick="adicionarItem"
+        android:src="@drawable/icon_add"
+        app:borderWidth="2dp"
+        app:fabSize="normal" />
+
+    <!--android:padding="@dimen/_5sdp"-->
 
     <!--<TextView-->
     <!--android:id="@+id/activity_novo_item_adicionar"-->
