@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import giovannigardusi.listadecompras.R;
+import giovannigardusi.listadecompras.Utils.ReaderSettings;
 import giovannigardusi.listadecompras.Utils.Settings;
 
 public class ActivitySettings extends AppCompatActivity {
@@ -41,6 +42,8 @@ public class ActivitySettings extends AppCompatActivity {
             public void onClick(View v) {
                 Settings.getInstance().setSimpleSave(simpleSaveSwitch.isChecked());
                 Settings.getInstance().setShowCheck(showCheckSwitch.isChecked());
+                // Save settings
+                ReaderSettings.write(activity);
                 activity.setResult(ActivityListaDeCompras.RESULT_SETTINGS);
                 activity.finish();
             }

@@ -11,6 +11,11 @@
         android:alphabeticShortcut="s"
         android:title="Salvar Lista"
         app:showAsAction="ifRoom"/>
+    <!--<item android:id="@+id/menu_lista_de_compras_enviar"-->
+        <!--android:icon="@drawable/icon_send"-->
+        <!--android:alphabeticShortcut="s"-->
+        <!--android:title="Enviar Lista"-->
+        <!--app:showAsAction="ifRoom" />-->
     <item android:id="@+id/menu_lista_de_compras_settings"
         android:icon="@drawable/icon_settings"
         android:alphabeticShortcut="o"

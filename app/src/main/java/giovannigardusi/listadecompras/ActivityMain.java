@@ -2,13 +2,16 @@ package giovannigardusi.listadecompras;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Window;
 import android.view.WindowManager;
 
+import java.io.IOException;
+
 import giovannigardusi.listadecompras.Activities.ActivityMenu;
+import giovannigardusi.listadecompras.Utils.ReaderSettings;
 import giovannigardusi.listadecompras.Utils.Settings;
 
 public class ActivityMain extends AppCompatActivity {
@@ -21,13 +24,17 @@ public class ActivityMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Window window = activity.getWindow();
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
 
-        //TODO [TEST] Configura Settings
-        Settings.getInstance().setSimpleSave(false);
-        Settings.getInstance().setShowCheck(true);
+        // Load settings
+        try {
+            ReaderSettings.read(activity);
+        } catch (IOException err) {
+            Settings.getInstance().setShowCheck(true);
+            Settings.getInstance().setSimpleSave(true);
+        }
 
         setContentView(R.layout.activity_main);
         mHandler = new Handler();

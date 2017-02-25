@@ -17,7 +17,6 @@ import giovannigardusi.listadecompras.Activities.ActivityListaDeCompras;
 import giovannigardusi.listadecompras.Adapters.AdapterArquivo;
 import giovannigardusi.listadecompras.Models.ModelProduto;
 import giovannigardusi.listadecompras.R;
-import giovannigardusi.listadecompras.Utils.Constants;
 import giovannigardusi.listadecompras.Utils.ReaderLista;
 
 public class ActivityAbrirLista extends AppCompatActivity {
@@ -40,14 +39,13 @@ public class ActivityAbrirLista extends AppCompatActivity {
         arquivosView = (ListView) findViewById(R.id.activity_abrir_lista_arquivos);
 
         // Remocao de arquivos indesejados
-        File instantRun = null, simpleSave = null;
+        ArrayList<File> excluded = new ArrayList<>();
         ArrayList<File> files = new ArrayList<>(Arrays.asList(activity.getFilesDir().listFiles()));
         for (File file : files) {
-            if (file.getName().equals("instant-run")) instantRun = file;
-            else if (file.getName().equals(Constants.SIMPLE_SAVE_NAME+".txt")) simpleSave = file;
+            if (file.getName().startsWith("_")) excluded.add(file);
+            else if (file.getName().equals("instant-run")) excluded.add(file);
         }
-        if (instantRun != null) files.remove(instantRun);
-        if (simpleSave != null) files.remove(simpleSave);
+        for (File file : excluded) files.remove(file);
 
         arquivosAdapter = new AdapterArquivo(activity, files);
         arquivosView.setAdapter(arquivosAdapter);

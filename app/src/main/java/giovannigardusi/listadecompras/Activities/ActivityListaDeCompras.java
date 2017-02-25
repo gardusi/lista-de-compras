@@ -30,7 +30,7 @@ import giovannigardusi.listadecompras.Utils.Settings;
 public class ActivityListaDeCompras extends AppCompatActivity {
 
     public final static String PARAM_LISTA = "listaDeCompras";
-    public final static String PARAM_SETTINGS = "settings";
+    public final static String PARAM_SAVED = "isSaved";
 
     public final static int RESULT_BACK = 0;
     public final static int RESULT_NEW_ITEM = 1;
@@ -45,6 +45,7 @@ public class ActivityListaDeCompras extends AppCompatActivity {
     private AdapterListaDeCompras adapterListaDeCompras;
 
     private ArrayList<ModelProduto> listaDeCompras;
+    private boolean isSaved;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +55,10 @@ public class ActivityListaDeCompras extends AppCompatActivity {
         // Recebe parametros salvos antes de onStop()
         if (savedInstanceState != null) {
             listaDeCompras = savedInstanceState.getParcelableArrayList(PARAM_LISTA);
+            isSaved = savedInstanceState.getBoolean(PARAM_SAVED);
         } else {
             // Recebe parametros da Activity anterior
+            isSaved = true;
             listaDeCompras = getIntent().getParcelableArrayListExtra(PARAM_LISTA);
             if (listaDeCompras == null) {
                 listaDeCompras = new ArrayList<>();
@@ -110,11 +113,13 @@ public class ActivityListaDeCompras extends AppCompatActivity {
                 case RESULT_NEW_ITEM:
                     ModelProduto newItem = data.getParcelableExtra(ActivityNovoItem.PARAM_ITEM);
                     listaDeCompras.add(newItem);
+                    isSaved = false;
                     break;
                 case RESULT_EDIT_ITEM:
                     ModelProduto editItem = data.getParcelableExtra(ActivityNovoItem.PARAM_ITEM);
                     int position = data.getIntExtra(ActivityNovoItem.PARAM_POS, -1);
                     listaDeCompras.set(position, editItem);
+                    isSaved = false;
                     break;
                 case RESULT_SETTINGS:
                     break;
@@ -146,6 +151,7 @@ public class ActivityListaDeCompras extends AppCompatActivity {
                     intentSave.putParcelableArrayListExtra(PARAM_LISTA, listaDeCompras);
                     startActivity(intentSave);
                 }
+                isSaved = true;
                 return true;
             // Tela de Imprimir Lista
             case R.id.menu_lista_de_compras_imprimir:
@@ -157,10 +163,16 @@ public class ActivityListaDeCompras extends AppCompatActivity {
                     Toast.makeText(activity, getString(R.string.activity_lista_de_compras_vazia), Toast.LENGTH_LONG).show();
                 }
                 return true;
+            // Enviar Lista
+//            case R.id.menu_lista_de_compras_enviar:
+//                Bitmap bmp = Screenshot.takeScreenshot(activity, R.id.activity_lista_de_compras_lista);
+//                Screenshot.onClickApp(activity, "Lista de Compras", bmp);
+//                return true;
             // Tela de Configuracoes
             case R.id.menu_lista_de_compras_settings:
                 Intent intentSettings = new Intent(activity, ActivitySettings.class);
                 startActivityForResult(intentSettings, RESULT_SETTINGS);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -168,6 +180,7 @@ public class ActivityListaDeCompras extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle instanceState) {
         instanceState.putParcelableArrayList(PARAM_LISTA, listaDeCompras);
+        instanceState.putBoolean(PARAM_SAVED, isSaved);
         super.onSaveInstanceState(instanceState);
     }
 
@@ -177,7 +190,7 @@ public class ActivityListaDeCompras extends AppCompatActivity {
     }
 
     private void saveAlert() {
-        if (listaDeCompras.size() > 0) {
+        if (!isSaved) {
             DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

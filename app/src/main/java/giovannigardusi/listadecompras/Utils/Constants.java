@@ -16,6 +16,7 @@ public class Constants {
     public static final String ONE_HALF = "½";
     public static final String ONE_FOURTH = "¼";
     public static final String SIMPLE_SAVE_NAME = "_simplesave";
+    public static final String SETTINGS_NAME = "_settings.txt";
 
     private Constants() {
         populateUnidades();
