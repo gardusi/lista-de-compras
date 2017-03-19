@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ActivityMain"
-            android:theme="@style/AppThemeNoActionBar">
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +25,7 @@
         <activity android:name=".Activities.ListaIO.ActivitySalvarLista" />
         <activity android:name=".Activities.ListaIO.ActivityAbrirLista" />
         <activity android:name=".Activities.ListaIO.ActivityImprimirLista" />
-        <activity android:name=".Activities.ActivitySettings"></activity>
+        <activity android:name=".Activities.ActivitySettings" />
     </application>
 
 </manifest>

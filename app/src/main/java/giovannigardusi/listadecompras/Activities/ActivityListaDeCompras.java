@@ -35,7 +35,8 @@ public class ActivityListaDeCompras extends AppCompatActivity {
     public final static int RESULT_BACK = 0;
     public final static int RESULT_NEW_ITEM = 1;
     public final static int RESULT_EDIT_ITEM = 2;
-    public final static int RESULT_SETTINGS = 3;
+    public final static int RESULT_SAVED_LIST = 3;
+    public final static int RESULT_SETTINGS = 4;
 
     private Activity activity = this;
 
@@ -46,6 +47,9 @@ public class ActivityListaDeCompras extends AppCompatActivity {
 
     private ArrayList<ModelProduto> listaDeCompras;
     private boolean isSaved;
+
+    public interface OnCheckListener { void onCheck(); }
+    public OnCheckListener onCheckListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +77,10 @@ public class ActivityListaDeCompras extends AppCompatActivity {
         listaDeComprasView = (ListView) findViewById(R.id.activity_lista_de_compras_lista);
         adicionarButton = (FloatingActionButton) findViewById(R.id.activity_lista_de_compras_adicionar);
 
+        onCheckListener = new OnCheckListener() {
+            @Override
+            public void onCheck() { isSaved = false; }
+        };
         listaDeComprasView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -86,14 +94,11 @@ public class ActivityListaDeCompras extends AppCompatActivity {
                         break;
                 }
             }
-
             @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
-            }
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) { }
         });
 
-        adapterListaDeCompras = new AdapterListaDeCompras(activity, listaDeCompras);
+        adapterListaDeCompras = new AdapterListaDeCompras(activity, listaDeCompras, onCheckListener);
         listaDeComprasView.setAdapter(adapterListaDeCompras);
         listaDeComprasView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -120,6 +125,9 @@ public class ActivityListaDeCompras extends AppCompatActivity {
                     int position = data.getIntExtra(ActivityNovoItem.PARAM_POS, -1);
                     listaDeCompras.set(position, editItem);
                     isSaved = false;
+                    break;
+                case RESULT_SAVED_LIST:
+                    isSaved = true;
                     break;
                 case RESULT_SETTINGS:
                     break;
@@ -149,9 +157,8 @@ public class ActivityListaDeCompras extends AppCompatActivity {
                 } else {
                     Intent intentSave = new Intent(activity, ActivitySalvarLista.class);
                     intentSave.putParcelableArrayListExtra(PARAM_LISTA, listaDeCompras);
-                    startActivity(intentSave);
+                    startActivityForResult(intentSave, RESULT_SAVED_LIST);
                 }
-                isSaved = true;
                 return true;
             // Tela de Imprimir Lista
             case R.id.menu_lista_de_compras_imprimir:

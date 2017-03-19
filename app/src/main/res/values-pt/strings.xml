@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Lista de Compras</string>
+    <string name="app_version">Lista de Compras v1.4.1</string>
     <string name="activity_abrir_lista_abrir">Abrir</string>
     <string name="activity_abrir_lista_dica">Nome da Lista</string>
     <string name="activity_abrir_lista_titulo">Abrir Lista</string>

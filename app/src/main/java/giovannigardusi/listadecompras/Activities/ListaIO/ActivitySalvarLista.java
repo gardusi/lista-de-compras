@@ -7,7 +7,6 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -58,6 +57,7 @@ public class ActivitySalvarLista extends AppCompatActivity {
                     boolean keepChecked = checkSwitch.isChecked();
                     ReaderLista.write(activity, filename, listaDeCompras, keepChecked);
                     Utils.hideKeyboard(activity);
+                    activity.setResult(ActivityListaDeCompras.RESULT_SAVED_LIST);
                     activity.finish();
                 } else arquivoEditText.setError(getString(R.string.activity_salvar_lista_rule));
             }
@@ -69,9 +69,16 @@ public class ActivitySalvarLista extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Utils.hideKeyboard(activity);
+                activity.setResult(ActivityListaDeCompras.RESULT_BACK);
                 activity.finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        activity.setResult(ActivityListaDeCompras.RESULT_BACK);
+        activity.finish();
     }
 }

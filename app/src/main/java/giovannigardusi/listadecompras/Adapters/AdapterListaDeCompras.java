@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import giovannigardusi.listadecompras.Activities.ActivityListaDeCompras;
 import giovannigardusi.listadecompras.Models.ModelProduto;
 import giovannigardusi.listadecompras.R;
 import giovannigardusi.listadecompras.Utils.Settings;
@@ -25,11 +26,13 @@ public class AdapterListaDeCompras extends ArrayAdapter {
     private Activity activity;
 
     private ArrayList<ModelProduto> listaDeProdutos;
+    private ActivityListaDeCompras.OnCheckListener onCheckListener;
 
-    public AdapterListaDeCompras(Activity activity, ArrayList<ModelProduto> lista) {
+    public AdapterListaDeCompras(Activity activity, ArrayList<ModelProduto> lista, ActivityListaDeCompras.OnCheckListener onCheckListener) {
         super(activity, R.layout.item_spinner_standard, lista);
         this.activity = activity;
         this.listaDeProdutos = lista;
+        this.onCheckListener = onCheckListener;
     }
 
     @Override
@@ -56,6 +59,10 @@ public class AdapterListaDeCompras extends ArrayAdapter {
                     int position = (Integer) buttonView.getTag();
                     listaDeProdutos.get(position).setMarcado(buttonView.isChecked());
                 }
+            });
+            checkBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) { onCheckListener.onCheck(); }
             });
             checkBox.setChecked(listaDeProdutos.get(position).getMarcado());
         } else {

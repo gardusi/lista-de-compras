@@ -33,7 +33,7 @@
             android:clipToPadding="false"
             android:fontFamily="sans-serif-light"
             android:paddingBottom="@dimen/_60sdp"
-            android:scrollbarStyle="outsideOverlay"/>
+            android:scrollbarStyle="outsideOverlay" />
 
     </LinearLayout>
 

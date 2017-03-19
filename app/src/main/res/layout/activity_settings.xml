@@ -9,6 +9,7 @@
     tools:context="giovannigardusi.listadecompras.Activities.ActivitySettings">
 
     <LinearLayout
+        android:id="@+id/activity_novo_item_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -75,5 +76,14 @@
             android:textSize="@dimen/_12sdp" />
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_novo_item_card"
+        android:gravity="center"
+        android:paddingTop="@dimen/_5sdp"
+        android:textSize="@dimen/_10sdp"
+        android:text="@string/app_version"/>
 
 </RelativeLayout>
